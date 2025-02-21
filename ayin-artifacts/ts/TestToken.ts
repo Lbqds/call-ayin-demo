@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as TestTokenContractJson } from "../test/TestToken.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace TestTokenTypes {
@@ -82,22 +82,22 @@ class Factory extends ContractFactory<
     getSymbol: async (
       params: Omit<TestContractParams<TestTokenTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getSymbol", params);
+      return testMethod(this, "getSymbol", params, getContractByCodeHash);
     },
     getName: async (
       params: Omit<TestContractParams<TestTokenTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getName", params);
+      return testMethod(this, "getName", params, getContractByCodeHash);
     },
     getDecimals: async (
       params: Omit<TestContractParams<TestTokenTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getDecimals", params);
+      return testMethod(this, "getDecimals", params, getContractByCodeHash);
     },
     getTotalSupply: async (
       params: Omit<TestContractParams<TestTokenTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getTotalSupply", params);
+      return testMethod(this, "getTotalSupply", params, getContractByCodeHash);
     },
     getToken: async (
       params: TestContractParams<
@@ -105,7 +105,7 @@ class Factory extends ContractFactory<
         { sender: Address; amount: bigint }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "getToken", params);
+      return testMethod(this, "getToken", params, getContractByCodeHash);
     },
   };
 }
@@ -118,6 +118,7 @@ export const TestToken = new Factory(
     "0831d766037e7873066276e891997881e8787f4fb4bd9d154925d80869efa129"
   )
 );
+registerContract(TestToken);
 
 // Use this class to interact with the blockchain
 export class TestTokenInstance extends ContractInstance {

@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as PauseableTestContractJson } from "../test/PauseableTest.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace PauseableTestTypes {
@@ -76,7 +76,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "pause", params);
+      return testMethod(this, "pause", params, getContractByCodeHash);
     },
     unpause: async (
       params: Omit<
@@ -84,7 +84,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "unpause", params);
+      return testMethod(this, "unpause", params, getContractByCodeHash);
     },
     whenNotPaused: async (
       params: Omit<
@@ -92,12 +92,12 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "whenNotPaused", params);
+      return testMethod(this, "whenNotPaused", params, getContractByCodeHash);
     },
     onlyOwner: async (
       params: TestContractParams<PauseableTestTypes.Fields, { caller: Address }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "onlyOwner", params);
+      return testMethod(this, "onlyOwner", params, getContractByCodeHash);
     },
     changeOwner: async (
       params: TestContractParams<
@@ -105,7 +105,7 @@ class Factory extends ContractFactory<
         { newOwner: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "changeOwner", params);
+      return testMethod(this, "changeOwner", params, getContractByCodeHash);
     },
     test_fn: async (
       params: Omit<
@@ -113,7 +113,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "test_fn", params);
+      return testMethod(this, "test_fn", params, getContractByCodeHash);
     },
   };
 }
@@ -126,6 +126,7 @@ export const PauseableTest = new Factory(
     "accc04ce9a0639d9e75a35191f1850fcbab983ee7c5b6b364654c2fd0aff2bdf"
   )
 );
+registerContract(PauseableTest);
 
 // Use this class to interact with the blockchain
 export class PauseableTestInstance extends ContractInstance {

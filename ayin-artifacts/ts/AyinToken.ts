@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as AyinTokenContractJson } from "../ayin/AyinToken.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace AyinTokenTypes {
@@ -85,32 +85,32 @@ class Factory extends ContractFactory<
     getSymbol: async (
       params: Omit<TestContractParams<AyinTokenTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getSymbol", params);
+      return testMethod(this, "getSymbol", params, getContractByCodeHash);
     },
     getName: async (
       params: Omit<TestContractParams<AyinTokenTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getName", params);
+      return testMethod(this, "getName", params, getContractByCodeHash);
     },
     getDecimals: async (
       params: Omit<TestContractParams<AyinTokenTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getDecimals", params);
+      return testMethod(this, "getDecimals", params, getContractByCodeHash);
     },
     getTotalSupply: async (
       params: Omit<TestContractParams<AyinTokenTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getTotalSupply", params);
+      return testMethod(this, "getTotalSupply", params, getContractByCodeHash);
     },
     onlyOwner: async (
       params: TestContractParams<AyinTokenTypes.Fields, { caller: Address }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "onlyOwner", params);
+      return testMethod(this, "onlyOwner", params, getContractByCodeHash);
     },
     changeOwner: async (
       params: TestContractParams<AyinTokenTypes.Fields, { newOwner: Address }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "changeOwner", params);
+      return testMethod(this, "changeOwner", params, getContractByCodeHash);
     },
     mint: async (
       params: TestContractParams<
@@ -118,12 +118,12 @@ class Factory extends ContractFactory<
         { to: Address; amount: bigint }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "mint", params);
+      return testMethod(this, "mint", params, getContractByCodeHash);
     },
     burn: async (
       params: TestContractParams<AyinTokenTypes.Fields, { amount: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "burn", params);
+      return testMethod(this, "burn", params, getContractByCodeHash);
     },
     upgrade: async (
       params: TestContractParams<
@@ -131,7 +131,7 @@ class Factory extends ContractFactory<
         { newBytecode: HexString }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "upgrade", params);
+      return testMethod(this, "upgrade", params, getContractByCodeHash);
     },
   };
 }
@@ -144,6 +144,7 @@ export const AyinToken = new Factory(
     "7f75ea9e77d1465402dcfe91491e82ba5ff773bafc132c3a5ee695589d42ac3b"
   )
 );
+registerContract(AyinToken);
 
 // Use this class to interact with the blockchain
 export class AyinTokenInstance extends ContractInstance {

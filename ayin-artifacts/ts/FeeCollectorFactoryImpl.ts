@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as FeeCollectorFactoryImplContractJson } from "../examples/FeeCollectorFactoryImpl.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace FeeCollectorFactoryImplTypes {
@@ -98,7 +98,7 @@ class Factory extends ContractFactory<
         { caller: Address; alphAmount: bigint; tokenPair: HexString }
       >
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "createFeeCollector", params);
+      return testMethod(this, "createFeeCollector", params, getContractByCodeHash);
     },
   };
 }
@@ -111,6 +111,7 @@ export const FeeCollectorFactoryImpl = new Factory(
     "966f75cddefe774a87dbf778012f4f3f494b3a860f4c975d0c5262a1be185d49"
   )
 );
+registerContract(FeeCollectorFactoryImpl);
 
 // Use this class to interact with the blockchain
 export class FeeCollectorFactoryImplInstance extends ContractInstance {

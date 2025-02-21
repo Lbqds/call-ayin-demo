@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as VestingScheduleContractJson } from "../ayin/VestingSchedule.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace VestingScheduleTypes {
@@ -118,7 +118,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getTokenId", params);
+      return testMethod(this, "getTokenId", params, getContractByCodeHash);
     },
     getVestedTotalAmount: async (
       params: Omit<
@@ -126,7 +126,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getVestedTotalAmount", params);
+      return testMethod(this, "getVestedTotalAmount", params, getContractByCodeHash);
     },
     getReleaseableAmount: async (
       params: Omit<
@@ -134,7 +134,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getReleaseableAmount", params);
+      return testMethod(this, "getReleaseableAmount", params, getContractByCodeHash);
     },
     claimVestedTokens: async (
       params: Omit<
@@ -142,7 +142,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "claimVestedTokens", params);
+      return testMethod(this, "claimVestedTokens", params, getContractByCodeHash);
     },
     getReleased: async (
       params: Omit<
@@ -150,7 +150,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getReleased", params);
+      return testMethod(this, "getReleased", params, getContractByCodeHash);
     },
     getBeneficiary: async (
       params: Omit<
@@ -158,7 +158,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<Address>> => {
-      return testMethod(this, "getBeneficiary", params);
+      return testMethod(this, "getBeneficiary", params, getContractByCodeHash);
     },
     getReleaseAt: async (
       params: Omit<
@@ -166,7 +166,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getReleaseAt", params);
+      return testMethod(this, "getReleaseAt", params, getContractByCodeHash);
     },
   };
 }
@@ -179,6 +179,7 @@ export const VestingSchedule = new Factory(
     "3dd6a9d365618b80604b8979b83f0fb501fe28c56cc40eda6f98ccf11352ee23"
   )
 );
+registerContract(VestingSchedule);
 
 // Use this class to interact with the blockchain
 export class VestingScheduleInstance extends ContractInstance {

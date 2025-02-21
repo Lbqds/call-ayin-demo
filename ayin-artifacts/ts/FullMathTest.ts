@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as FullMathTestContractJson } from "../examples/FullMathTest.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace FullMathTestTypes {
@@ -82,7 +82,7 @@ class Factory extends ContractFactory<FullMathTestInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<[bigint, bigint]>> => {
-      return testMethod(this, "fullMul", params);
+      return testMethod(this, "fullMul", params, getContractByCodeHash);
     },
     mulDiv: async (
       params: Omit<
@@ -93,7 +93,7 @@ class Factory extends ContractFactory<FullMathTestInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "mulDiv", params);
+      return testMethod(this, "mulDiv", params, getContractByCodeHash);
     },
     fraction: async (
       params: Omit<
@@ -101,7 +101,7 @@ class Factory extends ContractFactory<FullMathTestInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "fraction", params);
+      return testMethod(this, "fraction", params, getContractByCodeHash);
     },
   };
 }
@@ -114,6 +114,7 @@ export const FullMathTest = new Factory(
     "d6834220b59d306adb6cd548433f9e1ab4f20c155cad9c80ef89be27cb82a286"
   )
 );
+registerContract(FullMathTest);
 
 // Use this class to interact with the blockchain
 export class FullMathTestInstance extends ContractInstance {

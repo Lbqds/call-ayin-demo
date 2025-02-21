@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as StakingContractJson } from "../ayin/Staking.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace StakingTypes {
@@ -110,12 +110,12 @@ class Factory extends ContractFactory<StakingInstance, StakingTypes.Fields> {
     stakingAccountExists: async (
       params: TestContractParams<StakingTypes.Fields, { staker: Address }>
     ): Promise<TestContractResult<boolean>> => {
-      return testMethod(this, "stakingAccountExists", params);
+      return testMethod(this, "stakingAccountExists", params, getContractByCodeHash);
     },
     getStakingAccount: async (
       params: TestContractParams<StakingTypes.Fields, { staker: Address }>
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getStakingAccount", params);
+      return testMethod(this, "getStakingAccount", params, getContractByCodeHash);
     },
     createStakingAccount: async (
       params: TestContractParams<
@@ -123,87 +123,87 @@ class Factory extends ContractFactory<StakingInstance, StakingTypes.Fields> {
         { staker: Address; amount: bigint; rewardPerTokenPaid: bigint }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "createStakingAccount", params);
+      return testMethod(this, "createStakingAccount", params, getContractByCodeHash);
     },
     pause: async (
       params: Omit<TestContractParams<StakingTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "pause", params);
+      return testMethod(this, "pause", params, getContractByCodeHash);
     },
     unpause: async (
       params: Omit<TestContractParams<StakingTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "unpause", params);
+      return testMethod(this, "unpause", params, getContractByCodeHash);
     },
     whenNotPaused: async (
       params: Omit<TestContractParams<StakingTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "whenNotPaused", params);
+      return testMethod(this, "whenNotPaused", params, getContractByCodeHash);
     },
     onlyOwner: async (
       params: TestContractParams<StakingTypes.Fields, { caller: Address }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "onlyOwner", params);
+      return testMethod(this, "onlyOwner", params, getContractByCodeHash);
     },
     changeOwner: async (
       params: TestContractParams<StakingTypes.Fields, { newOwner: Address }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "changeOwner", params);
+      return testMethod(this, "changeOwner", params, getContractByCodeHash);
     },
     getTokenId: async (
       params: Omit<TestContractParams<StakingTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getTokenId", params);
+      return testMethod(this, "getTokenId", params, getContractByCodeHash);
     },
     getRewardsTokenId: async (
       params: Omit<TestContractParams<StakingTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getRewardsTokenId", params);
+      return testMethod(this, "getRewardsTokenId", params, getContractByCodeHash);
     },
     updateStakerReward: async (
       params: TestContractParams<StakingTypes.Fields, { account: HexString }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "updateStakerReward", params);
+      return testMethod(this, "updateStakerReward", params, getContractByCodeHash);
     },
     updateReward: async (
       params: Omit<TestContractParams<StakingTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "updateReward", params);
+      return testMethod(this, "updateReward", params, getContractByCodeHash);
     },
     earned: async (
       params: TestContractParams<StakingTypes.Fields, { acc: HexString }>
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "earned", params);
+      return testMethod(this, "earned", params, getContractByCodeHash);
     },
     calculateRewardPerToken: async (
       params: Omit<TestContractParams<StakingTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "calculateRewardPerToken", params);
+      return testMethod(this, "calculateRewardPerToken", params, getContractByCodeHash);
     },
     stake: async (
       params: TestContractParams<StakingTypes.Fields, { amount: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "stake", params);
+      return testMethod(this, "stake", params, getContractByCodeHash);
     },
     unstake: async (
       params: TestContractParams<StakingTypes.Fields, { amount: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "unstake", params);
+      return testMethod(this, "unstake", params, getContractByCodeHash);
     },
     sendRewards: async (
       params: TestContractParams<StakingTypes.Fields, { account: HexString }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "sendRewards", params);
+      return testMethod(this, "sendRewards", params, getContractByCodeHash);
     },
     claimRewards: async (
       params: Omit<TestContractParams<StakingTypes.Fields, never>, "testArgs">
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "claimRewards", params);
+      return testMethod(this, "claimRewards", params, getContractByCodeHash);
     },
     setRewardRate: async (
       params: TestContractParams<StakingTypes.Fields, { rate: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "setRewardRate", params);
+      return testMethod(this, "setRewardRate", params, getContractByCodeHash);
     },
     upgrade: async (
       params: TestContractParams<
@@ -211,7 +211,7 @@ class Factory extends ContractFactory<StakingInstance, StakingTypes.Fields> {
         { newBytecode: HexString }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "upgrade", params);
+      return testMethod(this, "upgrade", params, getContractByCodeHash);
     },
   };
 }
@@ -224,6 +224,7 @@ export const Staking = new Factory(
     "1dcf33af1a73e1a38f05b168f5d6da7e10e69607142b331825afaba1f2502ecd"
   )
 );
+registerContract(Staking);
 
 // Use this class to interact with the blockchain
 export class StakingInstance extends ContractInstance {

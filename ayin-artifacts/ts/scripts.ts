@@ -39,61 +39,62 @@ import { default as SwapMaxInScriptJson } from "../scripts/SwapMaxIn.ral.json";
 import { default as SwapMinOutScriptJson } from "../scripts/SwapMinOut.ral.json";
 import { default as WithdrawFeesScriptJson } from "../scripts/WithdrawFees.ral.json";
 import { default as GetTokenScriptJson } from "../test/GetToken.ral.json";
+import { getContractByCodeHash } from "./contracts";
 
 export const MintAyin = new ExecutableScript<{
   ayin: HexString;
   to: Address;
   amount: bigint;
-}>(Script.fromJson(MintAyinScriptJson));
+}>(Script.fromJson(MintAyinScriptJson, "", []), getContractByCodeHash);
 export const BurnXToken = new ExecutableScript<{
   liquidStaking: HexString;
   xTokenAmount: bigint;
-}>(Script.fromJson(BurnXTokenScriptJson));
+}>(Script.fromJson(BurnXTokenScriptJson, "", []), getContractByCodeHash);
 export const MintXToken = new ExecutableScript<{
   liquidStaking: HexString;
   amount: bigint;
-}>(Script.fromJson(MintXTokenScriptJson));
+}>(Script.fromJson(MintXTokenScriptJson, "", []), getContractByCodeHash);
 export const TopUpRewards = new ExecutableScript<{
   liquidStaking: HexString;
   amount: bigint;
-}>(Script.fromJson(TopUpRewardsScriptJson));
+}>(Script.fromJson(TopUpRewardsScriptJson, "", []), getContractByCodeHash);
 export const UpgradeLiquidStaking = new ExecutableScript<{
   staking: HexString;
   newBytecode: HexString;
-}>(Script.fromJson(UpgradeLiquidStakingScriptJson));
+}>(Script.fromJson(UpgradeLiquidStakingScriptJson, "", []), getContractByCodeHash);
 export const BuyAyin = new ExecutableScript<{
   presale: HexString;
   amount: bigint;
-}>(Script.fromJson(BuyAyinScriptJson));
+}>(Script.fromJson(BuyAyinScriptJson, "", []), getContractByCodeHash);
 export const DepositAyin = new ExecutableScript<{
   presale: HexString;
   amount: bigint;
-}>(Script.fromJson(DepositAyinScriptJson));
+}>(Script.fromJson(DepositAyinScriptJson, "", []), getContractByCodeHash);
 export const DestroyPresale = new ExecutableScript<{
   presale: HexString;
   balanceTo: Address;
-}>(Script.fromJson(DestroyPresaleScriptJson));
+}>(Script.fromJson(DestroyPresaleScriptJson, "", []), getContractByCodeHash);
 export const UpgradePresale = new ExecutableScript<{
   presale: HexString;
   newBytecode: HexString;
-}>(Script.fromJson(UpgradePresaleScriptJson));
+}>(Script.fromJson(UpgradePresaleScriptJson, "", []), getContractByCodeHash);
 export const ClaimRewards = new ExecutableScript<{ staking: HexString }>(
-  Script.fromJson(ClaimRewardsScriptJson)
+  Script.fromJson(ClaimRewardsScriptJson, "", []), getContractByCodeHash
 );
 export const Stake = new ExecutableScript<{
   staking: HexString;
   amount: bigint;
-}>(Script.fromJson(StakeScriptJson));
+}>(Script.fromJson(StakeScriptJson, "", []), getContractByCodeHash);
 export const Unstake = new ExecutableScript<{
   staking: HexString;
   amount: bigint;
-}>(Script.fromJson(UnstakeScriptJson));
+}>(Script.fromJson(UnstakeScriptJson, "", []), getContractByCodeHash);
 export const UpgradeStaking = new ExecutableScript<{
   staking: HexString;
   newBytecode: HexString;
-}>(Script.fromJson(UpgradeStakingScriptJson));
+}>(Script.fromJson(UpgradeStakingScriptJson, "", []), getContractByCodeHash);
 export const ClaimVestedTokens = new ExecutableScript<{ schedule: HexString }>(
-  Script.fromJson(ClaimVestedTokensScriptJson)
+  Script.fromJson(ClaimVestedTokensScriptJson, "", []), getContractByCodeHash
 );
 export const CreateVestingSchedule = new ExecutableScript<{
   factory: HexString;
@@ -101,7 +102,7 @@ export const CreateVestingSchedule = new ExecutableScript<{
   amount: bigint;
   beneficiary: Address;
   duration: bigint;
-}>(Script.fromJson(CreateVestingScheduleScriptJson));
+}>(Script.fromJson(CreateVestingScheduleScriptJson, "", []), getContractByCodeHash);
 export const AddLiquidity = new ExecutableScript<{
   sender: Address;
   router: HexString;
@@ -111,14 +112,14 @@ export const AddLiquidity = new ExecutableScript<{
   amount0Min: bigint;
   amount1Min: bigint;
   deadline: bigint;
-}>(Script.fromJson(AddLiquidityScriptJson));
+}>(Script.fromJson(AddLiquidityScriptJson, "", []), getContractByCodeHash);
 export const Burn = new ExecutableScript<{
   tokenPair: HexString;
   sender: Address;
   liquidity: bigint;
-}>(Script.fromJson(BurnScriptJson));
+}>(Script.fromJson(BurnScriptJson, "", []), getContractByCodeHash);
 export const CollectFee = new ExecutableScript<{ feeCollector: HexString }>(
-  Script.fromJson(CollectFeeScriptJson)
+  Script.fromJson(CollectFeeScriptJson, "", []), getContractByCodeHash
 );
 export const CreatePair = new ExecutableScript<{
   payer: Address;
@@ -126,17 +127,17 @@ export const CreatePair = new ExecutableScript<{
   alphAmount: bigint;
   tokenAId: HexString;
   tokenBId: HexString;
-}>(Script.fromJson(CreatePairScriptJson));
+}>(Script.fromJson(CreatePairScriptJson, "", []), getContractByCodeHash);
 export const EnableFeeCollector = new ExecutableScript<{
   tokenPairFactory: HexString;
   tokenPair: HexString;
-}>(Script.fromJson(EnableFeeCollectorScriptJson));
+}>(Script.fromJson(EnableFeeCollectorScriptJson, "", []), getContractByCodeHash);
 export const Mint = new ExecutableScript<{
   tokenPair: HexString;
   sender: Address;
   amount0: bigint;
   amount1: bigint;
-}>(Script.fromJson(MintScriptJson));
+}>(Script.fromJson(MintScriptJson, "", []), getContractByCodeHash);
 export const RemoveLiquidity = new ExecutableScript<{
   sender: Address;
   router: HexString;
@@ -145,11 +146,11 @@ export const RemoveLiquidity = new ExecutableScript<{
   amount0Min: bigint;
   amount1Min: bigint;
   deadline: bigint;
-}>(Script.fromJson(RemoveLiquidityScriptJson));
+}>(Script.fromJson(RemoveLiquidityScriptJson, "", []), getContractByCodeHash);
 export const SetFeeCollectorFactory = new ExecutableScript<{
   tokenPairFactory: HexString;
   feeCollectorFactory: HexString;
-}>(Script.fromJson(SetFeeCollectorFactoryScriptJson));
+}>(Script.fromJson(SetFeeCollectorFactoryScriptJson, "", []), getContractByCodeHash);
 export const Swap = new ExecutableScript<{
   tokenPair: HexString;
   sender: Address;
@@ -158,7 +159,7 @@ export const Swap = new ExecutableScript<{
   amount1In: bigint;
   amount0Out: bigint;
   amount1Out: bigint;
-}>(Script.fromJson(SwapScriptJson));
+}>(Script.fromJson(SwapScriptJson, "", []), getContractByCodeHash);
 export const SwapMaxIn = new ExecutableScript<{
   sender: Address;
   router: HexString;
@@ -167,7 +168,7 @@ export const SwapMaxIn = new ExecutableScript<{
   amountInMax: bigint;
   amountOut: bigint;
   deadline: bigint;
-}>(Script.fromJson(SwapMaxInScriptJson));
+}>(Script.fromJson(SwapMaxInScriptJson, "", []), getContractByCodeHash);
 export const SwapMinOut = new ExecutableScript<{
   sender: Address;
   router: HexString;
@@ -176,13 +177,13 @@ export const SwapMinOut = new ExecutableScript<{
   amountIn: bigint;
   amountOutMin: bigint;
   deadline: bigint;
-}>(Script.fromJson(SwapMinOutScriptJson));
+}>(Script.fromJson(SwapMinOutScriptJson, "", []), getContractByCodeHash);
 export const WithdrawFees = new ExecutableScript<{
   feeCollector: HexString;
   amount: bigint;
-}>(Script.fromJson(WithdrawFeesScriptJson));
+}>(Script.fromJson(WithdrawFeesScriptJson, "", []), getContractByCodeHash);
 export const GetToken = new ExecutableScript<{
   token: HexString;
   sender: Address;
   amount: bigint;
-}>(Script.fromJson(GetTokenScriptJson));
+}>(Script.fromJson(GetTokenScriptJson, "", []), getContractByCodeHash);

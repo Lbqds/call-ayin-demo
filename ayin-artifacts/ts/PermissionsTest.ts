@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as PermissionsTestContractJson } from "../test/PermissionsTest.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace PermissionsTestTypes {
@@ -72,7 +72,7 @@ class Factory extends ContractFactory<
         { caller: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "onlyOwner", params);
+      return testMethod(this, "onlyOwner", params, getContractByCodeHash);
     },
     changeOwner: async (
       params: TestContractParams<
@@ -80,7 +80,7 @@ class Factory extends ContractFactory<
         { newOwner: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "changeOwner", params);
+      return testMethod(this, "changeOwner", params, getContractByCodeHash);
     },
     something_private: async (
       params: Omit<
@@ -88,7 +88,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "something_private", params);
+      return testMethod(this, "something_private", params, getContractByCodeHash);
     },
   };
 }
@@ -101,6 +101,7 @@ export const PermissionsTest = new Factory(
     "9faa4a80ad67c7d8360699436106de3efe6b693f883be86e5e3b14e53dbb34a9"
   )
 );
+registerContract(PermissionsTest);
 
 // Use this class to interact with the blockchain
 export class PermissionsTestInstance extends ContractInstance {

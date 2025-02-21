@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as TokenPairFactoryContractJson } from "../dex/TokenPairFactory.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace TokenPairFactoryTypes {
@@ -103,7 +103,7 @@ class Factory extends ContractFactory<
         { factory: HexString }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "setFeeCollectorFactory", params);
+      return testMethod(this, "setFeeCollectorFactory", params, getContractByCodeHash);
     },
     updateFeeSetter: async (
       params: TestContractParams<
@@ -111,7 +111,7 @@ class Factory extends ContractFactory<
         { newFeeSetter: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "updateFeeSetter", params);
+      return testMethod(this, "updateFeeSetter", params, getContractByCodeHash);
     },
     getFeeSetter: async (
       params: Omit<
@@ -119,7 +119,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<Address>> => {
-      return testMethod(this, "getFeeSetter", params);
+      return testMethod(this, "getFeeSetter", params, getContractByCodeHash);
     },
     enableFeeCollector: async (
       params: TestContractParams<
@@ -127,7 +127,7 @@ class Factory extends ContractFactory<
         { tokenPair: HexString; alphAmount: bigint }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "enableFeeCollector", params);
+      return testMethod(this, "enableFeeCollector", params, getContractByCodeHash);
     },
     updateFeeCollector: async (
       params: TestContractParams<
@@ -135,7 +135,7 @@ class Factory extends ContractFactory<
         { tokenPair: HexString; newFeeCollectorId: HexString }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "updateFeeCollector", params);
+      return testMethod(this, "updateFeeCollector", params, getContractByCodeHash);
     },
     sortTokens: async (
       params: TestContractParams<
@@ -143,7 +143,7 @@ class Factory extends ContractFactory<
         { tokenA: HexString; tokenB: HexString }
       >
     ): Promise<TestContractResult<[HexString, HexString]>> => {
-      return testMethod(this, "sortTokens", params);
+      return testMethod(this, "sortTokens", params, getContractByCodeHash);
     },
     createPair: async (
       params: TestContractParams<
@@ -156,7 +156,7 @@ class Factory extends ContractFactory<
         }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "createPair", params);
+      return testMethod(this, "createPair", params, getContractByCodeHash);
     },
   };
 }
@@ -169,6 +169,7 @@ export const TokenPairFactory = new Factory(
     "44144899a2b71465a80654889afa8a2bf4a8f3cd0f30ad1880d2ffc7c12ad18b"
   )
 );
+registerContract(TokenPairFactory);
 
 // Use this class to interact with the blockchain
 export class TokenPairFactoryInstance extends ContractInstance {

@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as MathTestContractJson } from "../test/MathTest.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace MathTestTypes {
@@ -67,12 +67,12 @@ class Factory extends ContractFactory<MathTestInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "uqdiv", params);
+      return testMethod(this, "uqdiv", params, getContractByCodeHash);
     },
     sqrt: async (
       params: Omit<TestContractParams<never, { y: bigint }>, "initialFields">
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "sqrt", params);
+      return testMethod(this, "sqrt", params, getContractByCodeHash);
     },
   };
 }
@@ -85,6 +85,7 @@ export const MathTest = new Factory(
     "085c8183210ec7296681e12ab74e37bebee9d495e78e24cc9b3cd1b110d6df2a"
   )
 );
+registerContract(MathTest);
 
 // Use this class to interact with the blockchain
 export class MathTestInstance extends ContractInstance {

@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as VestingScheduleFactoryContractJson } from "../ayin/VestingScheduleFactory.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace VestingScheduleFactoryTypes {
@@ -85,7 +85,7 @@ class Factory extends ContractFactory<
         { caller: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "onlyOwner", params);
+      return testMethod(this, "onlyOwner", params, getContractByCodeHash);
     },
     changeOwner: async (
       params: TestContractParams<
@@ -93,7 +93,7 @@ class Factory extends ContractFactory<
         { newOwner: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "changeOwner", params);
+      return testMethod(this, "changeOwner", params, getContractByCodeHash);
     },
     createSchedule: async (
       params: TestContractParams<
@@ -106,7 +106,7 @@ class Factory extends ContractFactory<
         }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "createSchedule", params);
+      return testMethod(this, "createSchedule", params, getContractByCodeHash);
     },
     getVestingScheduleByAddress: async (
       params: TestContractParams<
@@ -114,7 +114,7 @@ class Factory extends ContractFactory<
         { address: Address }
       >
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getVestingScheduleByAddress", params);
+      return testMethod(this, "getVestingScheduleByAddress", params, getContractByCodeHash);
     },
   };
 }
@@ -127,6 +127,7 @@ export const VestingScheduleFactory = new Factory(
     "e81f54e3e8c5776aad49ff648c69d78fb1df48f7fe14e7c3b3abf922121b49c4"
   )
 );
+registerContract(VestingScheduleFactory);
 
 // Use this class to interact with the blockchain
 export class VestingScheduleFactoryInstance extends ContractInstance {

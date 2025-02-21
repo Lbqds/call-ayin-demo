@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as LiquidStakingContractJson } from "../ayin/LiquidStaking.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace LiquidStakingTypes {
@@ -118,7 +118,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getSymbol", params);
+      return testMethod(this, "getSymbol", params, getContractByCodeHash);
     },
     getName: async (
       params: Omit<
@@ -126,7 +126,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getName", params);
+      return testMethod(this, "getName", params, getContractByCodeHash);
     },
     getDecimals: async (
       params: Omit<
@@ -134,7 +134,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getDecimals", params);
+      return testMethod(this, "getDecimals", params, getContractByCodeHash);
     },
     getTotalSupply: async (
       params: Omit<
@@ -142,7 +142,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getTotalSupply", params);
+      return testMethod(this, "getTotalSupply", params, getContractByCodeHash);
     },
     pause: async (
       params: Omit<
@@ -150,7 +150,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "pause", params);
+      return testMethod(this, "pause", params, getContractByCodeHash);
     },
     unpause: async (
       params: Omit<
@@ -158,7 +158,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "unpause", params);
+      return testMethod(this, "unpause", params, getContractByCodeHash);
     },
     whenNotPaused: async (
       params: Omit<
@@ -166,12 +166,12 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "whenNotPaused", params);
+      return testMethod(this, "whenNotPaused", params, getContractByCodeHash);
     },
     onlyOwner: async (
       params: TestContractParams<LiquidStakingTypes.Fields, { caller: Address }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "onlyOwner", params);
+      return testMethod(this, "onlyOwner", params, getContractByCodeHash);
     },
     changeOwner: async (
       params: TestContractParams<
@@ -179,7 +179,7 @@ class Factory extends ContractFactory<
         { newOwner: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "changeOwner", params);
+      return testMethod(this, "changeOwner", params, getContractByCodeHash);
     },
     getCurrentRewardPerXToken: async (
       params: Omit<
@@ -187,7 +187,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getCurrentRewardPerXToken", params);
+      return testMethod(this, "getCurrentRewardPerXToken", params, getContractByCodeHash);
     },
     getCurrentInflationPerXToken: async (
       params: Omit<
@@ -195,7 +195,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getCurrentInflationPerXToken", params);
+      return testMethod(this, "getCurrentInflationPerXToken", params, getContractByCodeHash);
     },
     getCurrentPrice: async (
       params: Omit<
@@ -203,7 +203,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getCurrentPrice", params);
+      return testMethod(this, "getCurrentPrice", params, getContractByCodeHash);
     },
     updatePrice: async (
       params: Omit<
@@ -211,12 +211,12 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "updatePrice", params);
+      return testMethod(this, "updatePrice", params, getContractByCodeHash);
     },
     mint: async (
       params: TestContractParams<LiquidStakingTypes.Fields, { amount: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "mint", params);
+      return testMethod(this, "mint", params, getContractByCodeHash);
     },
     burn: async (
       params: TestContractParams<
@@ -224,17 +224,17 @@ class Factory extends ContractFactory<
         { xTokenAmount: bigint }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "burn", params);
+      return testMethod(this, "burn", params, getContractByCodeHash);
     },
     topUpRewards: async (
       params: TestContractParams<LiquidStakingTypes.Fields, { amount: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "topUpRewards", params);
+      return testMethod(this, "topUpRewards", params, getContractByCodeHash);
     },
     topUpInflationPool: async (
       params: TestContractParams<LiquidStakingTypes.Fields, { amount: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "topUpInflationPool", params);
+      return testMethod(this, "topUpInflationPool", params, getContractByCodeHash);
     },
     setGainPerMillisecond: async (
       params: TestContractParams<
@@ -242,7 +242,7 @@ class Factory extends ContractFactory<
         { newGainPerMillisecond: bigint }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "setGainPerMillisecond", params);
+      return testMethod(this, "setGainPerMillisecond", params, getContractByCodeHash);
     },
     setInflationRate: async (
       params: TestContractParams<
@@ -250,7 +250,7 @@ class Factory extends ContractFactory<
         { newInflationRate: bigint }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "setInflationRate", params);
+      return testMethod(this, "setInflationRate", params, getContractByCodeHash);
     },
     getTokenId: async (
       params: Omit<
@@ -258,7 +258,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getTokenId", params);
+      return testMethod(this, "getTokenId", params, getContractByCodeHash);
     },
     upgrade: async (
       params: TestContractParams<
@@ -266,7 +266,7 @@ class Factory extends ContractFactory<
         { newBytecode: HexString }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "upgrade", params);
+      return testMethod(this, "upgrade", params, getContractByCodeHash);
     },
   };
 }
@@ -279,6 +279,7 @@ export const LiquidStaking = new Factory(
     "dc5d6f6640386ddbbc49f93fbd1104dcaecd6e25004cac6cb11c6ee69750793a"
   )
 );
+registerContract(LiquidStaking);
 
 // Use this class to interact with the blockchain
 export class LiquidStakingInstance extends ContractInstance {

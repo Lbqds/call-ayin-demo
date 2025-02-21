@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as RouterContractJson } from "../dex/Router.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace RouterTypes {
@@ -115,7 +115,7 @@ class Factory extends ContractFactory<RouterInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<[bigint, bigint]>> => {
-      return testMethod(this, "addLiquidity_", params);
+      return testMethod(this, "addLiquidity_", params, getContractByCodeHash);
     },
     addLiquidity: async (
       params: Omit<
@@ -134,7 +134,7 @@ class Factory extends ContractFactory<RouterInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<[bigint, bigint, bigint]>> => {
-      return testMethod(this, "addLiquidity", params);
+      return testMethod(this, "addLiquidity", params, getContractByCodeHash);
     },
     removeLiquidity: async (
       params: Omit<
@@ -152,7 +152,7 @@ class Factory extends ContractFactory<RouterInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<[bigint, bigint]>> => {
-      return testMethod(this, "removeLiquidity", params);
+      return testMethod(this, "removeLiquidity", params, getContractByCodeHash);
     },
     getReserveInAndReserveOut: async (
       params: Omit<
@@ -163,7 +163,7 @@ class Factory extends ContractFactory<RouterInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<[bigint, bigint]>> => {
-      return testMethod(this, "getReserveInAndReserveOut", params);
+      return testMethod(this, "getReserveInAndReserveOut", params, getContractByCodeHash);
     },
     swapExactTokenForToken: async (
       params: Omit<
@@ -182,7 +182,7 @@ class Factory extends ContractFactory<RouterInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "swapExactTokenForToken", params);
+      return testMethod(this, "swapExactTokenForToken", params, getContractByCodeHash);
     },
     swapTokenForExactToken: async (
       params: Omit<
@@ -201,7 +201,7 @@ class Factory extends ContractFactory<RouterInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "swapTokenForExactToken", params);
+      return testMethod(this, "swapTokenForExactToken", params, getContractByCodeHash);
     },
     swap: async (
       params: Omit<
@@ -219,7 +219,7 @@ class Factory extends ContractFactory<RouterInstance, {}> {
         "initialFields"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "swap", params);
+      return testMethod(this, "swap", params, getContractByCodeHash);
     },
   };
 }
@@ -232,6 +232,7 @@ export const Router = new Factory(
     "633e8976ba3d86558719ebfe9f34c7ec4da2e7a78b5e043a60723b34f4f0ab80"
   )
 );
+registerContract(Router);
 
 // Use this class to interact with the blockchain
 export class RouterInstance extends ContractInstance {

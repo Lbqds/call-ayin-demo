@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as FeeCollectorPerTokenPairImplContractJson } from "../examples/FeeCollectorPerTokenPairImpl.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace FeeCollectorPerTokenPairImplTypes {
@@ -75,7 +75,7 @@ class Factory extends ContractFactory<
         { from: Address; amount: bigint }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "collectFee", params);
+      return testMethod(this, "collectFee", params, getContractByCodeHash);
     },
     withdraw: async (
       params: TestContractParams<
@@ -83,7 +83,7 @@ class Factory extends ContractFactory<
         { to: Address; amount: bigint }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "withdraw", params);
+      return testMethod(this, "withdraw", params, getContractByCodeHash);
     },
     destroy: async (
       params: TestContractParams<
@@ -91,7 +91,7 @@ class Factory extends ContractFactory<
         { to: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "destroy", params);
+      return testMethod(this, "destroy", params, getContractByCodeHash);
     },
     collectFeeManually: async (
       params: Omit<
@@ -99,7 +99,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "collectFeeManually", params);
+      return testMethod(this, "collectFeeManually", params, getContractByCodeHash);
     },
   };
 }
@@ -112,6 +112,7 @@ export const FeeCollectorPerTokenPairImpl = new Factory(
     "854934781b951bef0fe2035d06ef61bc11021157d31f464ac25364f5ef600c53"
   )
 );
+registerContract(FeeCollectorPerTokenPairImpl);
 
 // Use this class to interact with the blockchain
 export class FeeCollectorPerTokenPairImplInstance extends ContractInstance {

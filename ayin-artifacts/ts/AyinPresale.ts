@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as AyinPresaleContractJson } from "../ayin/AyinPresale.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace AyinPresaleTypes {
@@ -89,12 +89,12 @@ class Factory extends ContractFactory<
     onlyOwner: async (
       params: TestContractParams<AyinPresaleTypes.Fields, { caller: Address }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "onlyOwner", params);
+      return testMethod(this, "onlyOwner", params, getContractByCodeHash);
     },
     changeOwner: async (
       params: TestContractParams<AyinPresaleTypes.Fields, { newOwner: Address }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "changeOwner", params);
+      return testMethod(this, "changeOwner", params, getContractByCodeHash);
     },
     getAyinTokenId: async (
       params: Omit<
@@ -102,7 +102,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getAyinTokenId", params);
+      return testMethod(this, "getAyinTokenId", params, getContractByCodeHash);
     },
     getTokensLeft: async (
       params: Omit<
@@ -110,7 +110,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getTokensLeft", params);
+      return testMethod(this, "getTokensLeft", params, getContractByCodeHash);
     },
     getAlphPerToken: async (
       params: Omit<
@@ -118,7 +118,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getAlphPerToken", params);
+      return testMethod(this, "getAlphPerToken", params, getContractByCodeHash);
     },
     getSaleOpen: async (
       params: Omit<
@@ -126,27 +126,27 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<boolean>> => {
-      return testMethod(this, "getSaleOpen", params);
+      return testMethod(this, "getSaleOpen", params, getContractByCodeHash);
     },
     depositAyin: async (
       params: TestContractParams<AyinPresaleTypes.Fields, { amount: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "depositAyin", params);
+      return testMethod(this, "depositAyin", params, getContractByCodeHash);
     },
     setSaleOpen: async (
       params: TestContractParams<AyinPresaleTypes.Fields, { open: boolean }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "setSaleOpen", params);
+      return testMethod(this, "setSaleOpen", params, getContractByCodeHash);
     },
     setAlphPerToken: async (
       params: TestContractParams<AyinPresaleTypes.Fields, { apt: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "setAlphPerToken", params);
+      return testMethod(this, "setAlphPerToken", params, getContractByCodeHash);
     },
     buy: async (
       params: TestContractParams<AyinPresaleTypes.Fields, { amount: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "buy", params);
+      return testMethod(this, "buy", params, getContractByCodeHash);
     },
     withdrawToken_: async (
       params: TestContractParams<
@@ -154,7 +154,7 @@ class Factory extends ContractFactory<
         { caller: Address; tokenId: HexString; amount: bigint; sendTo: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "withdrawToken_", params);
+      return testMethod(this, "withdrawToken_", params, getContractByCodeHash);
     },
     withdrawAlph: async (
       params: TestContractParams<
@@ -162,7 +162,7 @@ class Factory extends ContractFactory<
         { amount: bigint; sendTo: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "withdrawAlph", params);
+      return testMethod(this, "withdrawAlph", params, getContractByCodeHash);
     },
     withdrawAyin: async (
       params: TestContractParams<
@@ -170,7 +170,7 @@ class Factory extends ContractFactory<
         { amount: bigint; sendTo: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "withdrawAyin", params);
+      return testMethod(this, "withdrawAyin", params, getContractByCodeHash);
     },
     destroy: async (
       params: TestContractParams<
@@ -178,7 +178,7 @@ class Factory extends ContractFactory<
         { remainingBalancesTo: Address }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "destroy", params);
+      return testMethod(this, "destroy", params, getContractByCodeHash);
     },
     upgrade: async (
       params: TestContractParams<
@@ -186,7 +186,7 @@ class Factory extends ContractFactory<
         { newBytecode: HexString }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "upgrade", params);
+      return testMethod(this, "upgrade", params, getContractByCodeHash);
     },
   };
 }
@@ -199,6 +199,7 @@ export const AyinPresale = new Factory(
     "92841263091066e79f85e643a434e97b5418f9734945bf3bab689130afc3a749"
   )
 );
+registerContract(AyinPresale);
 
 // Use this class to interact with the blockchain
 export class AyinPresaleInstance extends ContractInstance {

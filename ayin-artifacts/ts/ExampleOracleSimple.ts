@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as ExampleOracleSimpleContractJson } from "../examples/ExampleOracleSimple.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace ExampleOracleSimpleTypes {
@@ -99,7 +99,7 @@ class Factory extends ContractFactory<
         { x: bigint; y: bigint }
       >
     ): Promise<TestContractResult<[bigint, bigint]>> => {
-      return testMethod(this, "fullMul", params);
+      return testMethod(this, "fullMul", params, getContractByCodeHash);
     },
     mulDiv: async (
       params: TestContractParams<
@@ -107,7 +107,7 @@ class Factory extends ContractFactory<
         { a: bigint; b: bigint; denominator: bigint }
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "mulDiv", params);
+      return testMethod(this, "mulDiv", params, getContractByCodeHash);
     },
     fraction: async (
       params: TestContractParams<
@@ -115,7 +115,7 @@ class Factory extends ContractFactory<
         { numerator: bigint; denominator: bigint }
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "fraction", params);
+      return testMethod(this, "fraction", params, getContractByCodeHash);
     },
     currentCumulativePrices: async (
       params: TestContractParams<
@@ -123,7 +123,7 @@ class Factory extends ContractFactory<
         { currentBlockTimeStamp: bigint }
       >
     ): Promise<TestContractResult<[bigint, bigint]>> => {
-      return testMethod(this, "currentCumulativePrices", params);
+      return testMethod(this, "currentCumulativePrices", params, getContractByCodeHash);
     },
     update: async (
       params: Omit<
@@ -131,7 +131,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "update", params);
+      return testMethod(this, "update", params, getContractByCodeHash);
     },
     consult: async (
       params: TestContractParams<
@@ -139,7 +139,7 @@ class Factory extends ContractFactory<
         { tokenId: HexString; amountIn: bigint }
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "consult", params);
+      return testMethod(this, "consult", params, getContractByCodeHash);
     },
   };
 }
@@ -152,6 +152,7 @@ export const ExampleOracleSimple = new Factory(
     "52a275cfc409ff8fce483c7f9af7242922b40286e1e3174a129476a459dc67ac"
   )
 );
+registerContract(ExampleOracleSimple);
 
 // Use this class to interact with the blockchain
 export class ExampleOracleSimpleInstance extends ContractInstance {

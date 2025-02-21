@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { RunScriptResult, DeployContractExecutionResult } from "@alephium/cli";
+import { RunScriptResult, DeployContractExecutionResult } from "@alephium/web3";
 import { NetworkId } from "@alephium/web3";
 import {
   TokenPair,
@@ -19,7 +19,6 @@ import {
   AyinPresaleInstance,
 } from ".";
 import { default as mainnetDeployments } from "../.deployments.mainnet.json";
-import { default as testnetDeployments } from "../.deployments.testnet.json";
 
 export type Deployments = {
   deployerAddress: string;
@@ -106,8 +105,6 @@ export function loadDeployments(
   const deployments =
     networkId === "mainnet"
       ? mainnetDeployments
-      : networkId === "testnet"
-      ? testnetDeployments
       : undefined;
   if (deployments === undefined) {
     throw Error("The contract has not been deployed to the " + networkId);

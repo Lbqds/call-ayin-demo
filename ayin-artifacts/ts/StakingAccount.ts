@@ -25,7 +25,7 @@ import {
   getContractEventsCurrentCount,
 } from "@alephium/web3";
 import { default as StakingAccountContractJson } from "../ayin/StakingAccount.ral.json";
-import { getContractByCodeHash } from "./contracts";
+import { getContractByCodeHash, registerContract } from "./contracts";
 
 // Custom types for the contract
 export namespace StakingAccountTypes {
@@ -103,7 +103,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getTokenId", params);
+      return testMethod(this, "getTokenId", params, getContractByCodeHash);
     },
     getRewardsTokenId: async (
       params: Omit<
@@ -111,7 +111,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getRewardsTokenId", params);
+      return testMethod(this, "getRewardsTokenId", params, getContractByCodeHash);
     },
     getStaker: async (
       params: Omit<
@@ -119,7 +119,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<Address>> => {
-      return testMethod(this, "getStaker", params);
+      return testMethod(this, "getStaker", params, getContractByCodeHash);
     },
     getAmountStaked: async (
       params: Omit<
@@ -127,7 +127,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getAmountStaked", params);
+      return testMethod(this, "getAmountStaked", params, getContractByCodeHash);
     },
     getRewardPerTokenPaid: async (
       params: Omit<
@@ -135,7 +135,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getRewardPerTokenPaid", params);
+      return testMethod(this, "getRewardPerTokenPaid", params, getContractByCodeHash);
     },
     getRewards: async (
       params: Omit<
@@ -143,7 +143,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<bigint>> => {
-      return testMethod(this, "getRewards", params);
+      return testMethod(this, "getRewards", params, getContractByCodeHash);
     },
     setRewards: async (
       params: TestContractParams<
@@ -151,17 +151,17 @@ class Factory extends ContractFactory<
         { newRewards: bigint; newRewardPerToken: bigint }
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "setRewards", params);
+      return testMethod(this, "setRewards", params, getContractByCodeHash);
     },
     stake: async (
       params: TestContractParams<StakingAccountTypes.Fields, { amount: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "stake", params);
+      return testMethod(this, "stake", params, getContractByCodeHash);
     },
     unstake: async (
       params: TestContractParams<StakingAccountTypes.Fields, { amount: bigint }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "unstake", params);
+      return testMethod(this, "unstake", params, getContractByCodeHash);
     },
     claimRewards: async (
       params: Omit<
@@ -169,7 +169,7 @@ class Factory extends ContractFactory<
         "testArgs"
       >
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "claimRewards", params);
+      return testMethod(this, "claimRewards", params, getContractByCodeHash);
     },
   };
 }
@@ -182,6 +182,7 @@ export const StakingAccount = new Factory(
     "fcc04774d79eddbeb3fa437b898b159e647b8eca0c95510b98f64320d19ca707"
   )
 );
+registerContract(StakingAccount);
 
 // Use this class to interact with the blockchain
 export class StakingAccountInstance extends ContractInstance {
