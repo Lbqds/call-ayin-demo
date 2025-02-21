@@ -11,9 +11,123 @@
     "skipAbstractContractCheck": false
   },
   "infos": {
+    "GetAyinTokenPair": {
+      "sourceFile": "get-ayin-token-pair.ral",
+      "sourceCodeHash": "6b52387e82668a86b451563fa01cf2c29afb456064230d8716862f08dda3f2f7",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IAyinPresale": {
+      "sourceFile": "ayin-interfaces/IAyinPresale__.ral",
+      "sourceCodeHash": "6cbe186a43f25918ca1ba96d873eb84a14c2390edcdff0f39fb99d5b665c4244",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IAyinToken": {
+      "sourceFile": "ayin-interfaces/IAyinToken__.ral",
+      "sourceCodeHash": "e3276155af4607d72a5b30f44bf5def0c121b95956c200a12eab6081a2fcc326",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IExampleOracleSimple": {
+      "sourceFile": "ayin-interfaces/IExampleOracleSimple__.ral",
+      "sourceCodeHash": "2af469ae2ed3d024ad5244ea6f9a44bb48ce5175c884fb49df8ae5512bb1ed92",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IFeeCollectorFactoryImpl": {
+      "sourceFile": "ayin-interfaces/IFeeCollectorFactoryImpl__.ral",
+      "sourceCodeHash": "9e92b1bd11cbd244e9a8618348c11cf3e12085eef0c6125ddba667f789527d06",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IFeeCollectorPerTokenPairImpl": {
+      "sourceFile": "ayin-interfaces/IFeeCollectorPerTokenPairImpl__.ral",
+      "sourceCodeHash": "7f4136dac53b0812ac0a12f016007837963487e4186f4135bd979a90e2f84d4d",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IFullMathTest": {
+      "sourceFile": "ayin-interfaces/IFullMathTest__.ral",
+      "sourceCodeHash": "58122e7cc90f704328b40274b27b63907c8db3574f56a41ad48eeb47414682a6",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
     "IFungibleToken": {
       "sourceFile": "../node_modules/@alephium/web3/std/fungible_token_interface.ral",
       "sourceCodeHash": "62910bf11e1eeb6cb2fd468626ff606a9b06306b2b81590c3b10f6deb5966bde",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "ILiquidStaking": {
+      "sourceFile": "ayin-interfaces/ILiquidStaking__.ral",
+      "sourceCodeHash": "17fcad53792f756463d10186de7db8d5adc36dc0a05217f913524b06e8564eff",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IMathTest": {
+      "sourceFile": "ayin-interfaces/IMathTest__.ral",
+      "sourceCodeHash": "ec39d96f0e00d1660d143de54de6c50ee369d0ef11eac3939528b7c54783fd93",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IPauseableTest": {
+      "sourceFile": "ayin-interfaces/IPauseableTest__.ral",
+      "sourceCodeHash": "40552987a3bee93df1264a46687e4dd7a9e9090139da611e0995d880fdcfc265",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IPermissionsTest": {
+      "sourceFile": "ayin-interfaces/IPermissionsTest__.ral",
+      "sourceCodeHash": "edfeab4d830ac7f353ed76d6111255580cdca230a92336e5ac09877385a34163",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IRouter": {
+      "sourceFile": "ayin-interfaces/IRouter__.ral",
+      "sourceCodeHash": "f622de52dafd3be56ea5d6a163f9b5fb4d404117ac590499accd9d93963d8f52",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IStaking": {
+      "sourceFile": "ayin-interfaces/IStaking__.ral",
+      "sourceCodeHash": "258e0451499d672b8ce6ecbb8eb5bb1bb234efc507334aff87d877307c375223",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IStakingAccount": {
+      "sourceFile": "ayin-interfaces/IStakingAccount__.ral",
+      "sourceCodeHash": "17bdebb0bb55311d7d1f8874985de2231d904184f268c5f24c4edc9022df6f31",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "ITestToken": {
+      "sourceFile": "ayin-interfaces/ITestToken__.ral",
+      "sourceCodeHash": "778a5f869949260cb693bf405d0f50f0dc50847de59148bee02cc59eb35f1230",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "ITokenPair": {
+      "sourceFile": "ayin-interfaces/ITokenPair__.ral",
+      "sourceCodeHash": "238a595f6d5a55f00b57d20246dc65a45860b837463d6bbe7977f17ac06a4c11",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "ITokenPairFactory": {
+      "sourceFile": "ayin-interfaces/ITokenPairFactory__.ral",
+      "sourceCodeHash": "0a8319857fff88cc3c722f0ad9271350eda54f90b587dd944baf7596fb830042",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IVestingSchedule": {
+      "sourceFile": "ayin-interfaces/IVestingSchedule__.ral",
+      "sourceCodeHash": "67989d7ce6c924a90b9baebfae13b9ea2daef999cd3ab7890afb5dbc2f58679d",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": ""
+    },
+    "IVestingScheduleFactory": {
+      "sourceFile": "ayin-interfaces/IVestingScheduleFactory__.ral",
+      "sourceCodeHash": "13c8fec3ec3f33cda851370bd9a1f12b874baa8878951c3db5c4cacce2e18739",
       "bytecodeDebugPatch": "",
       "codeHashDebug": ""
     },

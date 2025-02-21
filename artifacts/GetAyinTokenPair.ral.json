@@ -1,0 +1,52 @@
+{
+  "version": "v3.10.0",
+  "name": "GetAyinTokenPair",
+  "bytecodeTemplate": "0201000003010d{1}{2}000117011700{0}1600160144cc17021602020000020402101600711702160171170316021603314c0316001601021601160002",
+  "fieldsSig": {
+    "names": [
+      "ayinPairFactory",
+      "firstTokenId",
+      "secondTokenId"
+    ],
+    "types": [
+      "ITokenPairFactory__",
+      "ByteVec",
+      "ByteVec"
+    ],
+    "isMutable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "functions": [
+    {
+      "name": "main",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "ByteVec"
+      ]
+    },
+    {
+      "name": "sortTokens",
+      "paramNames": [
+        "tokenA",
+        "tokenB"
+      ],
+      "paramTypes": [
+        "ByteVec",
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false,
+        false
+      ],
+      "returnTypes": [
+        "ByteVec",
+        "ByteVec"
+      ]
+    }
+  ]
+}

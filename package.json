@@ -13,6 +13,7 @@
     "lint:fix": "eslint . --fix --ext ts",
     "test": "jest -i --config ./jest-config.json"
   },
+  "type": "commonjs",
   "dependencies": {
     "@alephium/web3": "^1.11.5"
   },

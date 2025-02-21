@@ -1,0 +1,20 @@
+TxScript GetAyinTokenPair(
+    ayinPairFactory: ITokenPairFactory__,
+    firstTokenId: ByteVec,
+    secondTokenId: ByteVec
+) {
+    fn sortTokens(tokenA: ByteVec, tokenB: ByteVec) -> (ByteVec, ByteVec) {
+        let left = u256From32Byte!(tokenA)
+        let right = u256From32Byte!(tokenB)
+        if (left < right) {
+            return tokenA, tokenB
+        }
+        return tokenB, tokenA
+    } 
+    
+    pub fn main() -> ByteVec {
+        let (token0Id, token1Id) = sortTokens(firstTokenId, secondTokenId)
+        let ayinPairId = subContractIdOf!(ayinPairFactory, token0Id ++ token1Id)
+        return ayinPairId
+    }
+}
