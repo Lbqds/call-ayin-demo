@@ -21,3 +21,4 @@ export * from "./PauseableTest";
 export * from "./PermissionsTest";
 export * from "./TestToken";
 export * from "./scripts";
+export * from "./contracts"
